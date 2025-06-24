@@ -48,10 +48,8 @@ defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0
 
 # A11y queens
 brew install --cask keycastr colour-contrast-analyser pika 
-brew install --cask background-music # Background audio capture
+# brew install --cask background-music # Background audio capture
 # Alternative screen recorder - https://rewatch.com/screen-recorder/
-
-brew install --cask postman
 
 # Mac customization configs (https://macos-defaults.com/)
 ### Swap Option and Command keys - by Copilot ❤️
@@ -75,8 +73,7 @@ defaults write -g NSScrollAnimationEnabled -bool false
 killall Dock
 
 # Other apps
-brew install --cask microsoft-edge microsoft-teams
-brew install --cask spotify discord
+brew install --cask spotify
 
 # Slack thread extension
 gh extension install https://github.com/rneatherway/gh-slack
