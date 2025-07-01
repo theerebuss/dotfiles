@@ -45,8 +45,8 @@ alias gfix="git add --all && git commit --amend --no-edit"
 
 alias gl="git log"
 alias ga="git add ."
-alias gum="git checkout master && git fetch origin master && git merge FETCH_HEAD && git checkout -"
-alias gummy="gum && git merge master"
+alias gum="git checkout main && git fetch origin main && git merge FETCH_HEAD && git checkout -"
+alias gummy="gum && git merge main"
 ### Get TODOs you authored - https://twitter.com/almonk/status/1576294814831718400
 alias todo='git grep -l TODO | xargs -n1 git blame -f -n -w | grep "$(git config user.name)" | grep TODO | sed "s/.\{9\}//" | sed "s/(.*)[[:space:]]*//"'
 
