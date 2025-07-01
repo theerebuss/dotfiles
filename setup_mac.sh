@@ -74,6 +74,7 @@ killall Dock
 
 # Other apps
 brew install --cask spotify
+brew install --cask datweatherdoe
 
 # Slack thread extension
 gh extension install https://github.com/rneatherway/gh-slack
