@@ -8,6 +8,8 @@ read -p "Email: " email
 read -p "Key password: " -s password
 echo ""
 
+echo "Setting up VSCode as the git editor"
+git config --global core.editor "code -r --wait"
 
 echo "Setting up global Git identity"
 
