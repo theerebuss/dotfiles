@@ -78,3 +78,6 @@ brew install --cask datweatherdoe
 
 # Slack thread extension
 gh extension install https://github.com/rneatherway/gh-slack
+
+# Local GH actions runner
+gh extension install https://github.com/nektos/gh-act
