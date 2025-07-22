@@ -204,6 +204,7 @@ install_config_free_apps() {
     brew install firefox
     brew install cap
     brew install raycast
+    brew install bluesnooze # To disable bluetooth on lid close because Apple won't let us do it
 
     ## Other tools
     brew install slack
