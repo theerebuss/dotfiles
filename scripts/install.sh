@@ -18,7 +18,7 @@ cp -f $CURR_DIR/configs/.p10k.zsh $HOME/.p10k.zsh
 
 sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
 
-if $CODESPACES -eq true && test -z "$CODESPACE_DISPLAYNAME" ; then
+if $CODESPACES -eq true && test -z "$CODESPACE_DISPLAYNAME"; then
     codespaces=$(gh codespace list)
     codespace_name=$(echo "$codespaces" | awk '{print $1, $2}' | grep $CODESPACE_NAME | awk '{print $2}')
     echo "export CODESPACE_DISPLAYNAME=${codespace_name}" >>~/.zshrc

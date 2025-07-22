@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 password=""
 echo "Please provide your Git commit info"
 read -p "Full name: " fullName
@@ -34,13 +33,13 @@ ssh_key=$(cat ~/.ssh/$key_name.pub)
 github_new_ssh_url="https://github.com/settings/ssh/new"
 echo "Please paste the public key to your GitHub account's SSH keys"
 echo $ssh_key
+
 # WSL
 explorer.exe $github_new_ssh_url 2>/dev/null
 # Mac
 open $github_new_ssh_url 2>/dev/null
 
-read -p "Press any key to resume..." 
-
+read -p "Press any key to resume..."
 
 echo "Setting up SSH signing key"
 
@@ -66,7 +65,7 @@ open https://github.com/settings/ssh/new 2>/dev/null
 
 read -p "Press any key to resume..."
 
-awk '{ print $3 " " $1 " " $2 }' ~/.ssh/$signing_key_name.pub >> ~/.ssh/allowed_signers
+awk '{ print $3 " " $1 " " $2 }' ~/.ssh/$signing_key_name.pub >>~/.ssh/allowed_signers
 
 git config --global gpg.format ssh
 git config --global user.signingkey "$(cat ~/.ssh/$signing_key_name.pub)"
@@ -74,10 +73,10 @@ git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
 
 # Create SSH config file
 touch ~/.ssh/config
-echo "Host *" >> ~/.ssh/config
-echo "    IdentityFile ~/.ssh/$key_name" >> ~/.ssh/config
+echo "Host *" >>~/.ssh/config
+echo "    IdentityFile ~/.ssh/$key_name" >>~/.ssh/config
 
 # Add SSH key to agent
-eval `ssh-agent`
+eval $(ssh-agent)
 ssh-add ~/.ssh/$key_name
 ssh-add ~/.ssh/$signing_key_name
