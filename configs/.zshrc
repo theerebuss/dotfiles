@@ -139,3 +139,42 @@ cr() {
   echo "Deleting codespace $1 ($codespace_name)..."
   gh codespace delete -c $codespace_name
 }
+
+# Fetch Slack thread, wrap in <details>, use accessible link as <summary> and copy into clipboard.
+# Requires gh CLI with Slack extension installed.
+#
+# Usage: slack <slack_url>
+# Arguments:
+#   <slack_url>: The URL of a thread or message
+slack() {
+  local url=$1
+  if [ -z "$url" ]; then
+    echo "Usage: slack <slack_url>"
+    return 1
+  fi
+  
+  local thread=$(gh slack read $url)
+
+  local output=$(cat <<EOF
+<details>
+  <summary>
+    <a href="$url">Slack thread</a>
+  </summary>
+
+$thread
+</details>
+EOF
+)
+
+  if command -v pbcopy &>/dev/null; then
+    echo "$output" | pbcopy
+  elif command -v xclip &>/dev/null; then
+    echo "$output" | xclip -selection clipboard
+  else
+    echo "No clipboard utility found. Install pbcopy (macOS) or xclip (Linux) to automatically copy the output."
+    echo "\n$output\n"
+    return 1
+  fi
+
+  echo "Slack thread copied to clipboard."
+}
