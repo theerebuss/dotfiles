@@ -7,5 +7,6 @@ brew install figma
 brew install cap
 brew install postgresql
 brew install google-cloud-sdk
-brew install --cask docker
+brew install docker
 brew install docker-compose
+brew install temporal
