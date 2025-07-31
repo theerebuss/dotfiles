@@ -51,6 +51,31 @@ alias gsp="git stash pop"
 alias gb="git for-each-ref --sort=-creatordate --format='%(creatordate:short) %(refname:short)' refs/heads/"
 alias gum="git checkout main && git fetch origin main && git merge FETCH_HEAD && git checkout -"
 alias gummy="gum && git rebase main"
+
+# Usage: gb_special [<args>]
+# Arguments:
+#   <args>: Additional arguments to pass to `git branch`
+# Example: `gb -D <branch_name>` to delete a branch
+#
+# If no arguments are provided, it will list branches with creation date and highlight the current branch
+gb_special() {
+  if [ "$#" -gt 0 ]; then
+    git branch "$@"
+    return
+  fi
+  
+  local current_branch=$(git rev-parse --abbrev-ref HEAD)
+  git for-each-ref --sort=-creatordate --format='%(creatordate:short) %(creatordate:format:%H:%M:%S) %(refname:short)' refs/heads/ | \
+    awk -v branch="$current_branch" '
+      $0 ~ branch"$" {
+        print "\033[32m\033[4m" $0 "\033[0m"
+        next
+      }
+      { print }
+    '
+}
+alias gb="gb_special"
+
 ### Get TODOs you authored - https://twitter.com/almonk/status/1576294814831718400
 alias todo='git grep -l TODO | xargs -n1 git blame -f -n -w | grep "$(git config user.name)" | grep TODO | sed "s/.\{9\}//" | sed "s/(.*)[[:space:]]*//"'
 
