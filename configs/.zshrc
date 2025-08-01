@@ -53,17 +53,15 @@ gdb() {
     git push origin --delete $1
 }
 
-### Add all and ammend last commit
-alias gfix="git add --all && git commit --amend --no-edit"
-
 alias gl="git log"
 alias ga="git add ."
 alias gk="git checkout"
+alias gcf="git commit --fixup"
+alias gcane="git commit --amend --no-edit"
+alias gum="git checkout main && git fetch origin main && git merge FETCH_HEAD && git checkout -"
+alias gummy="gum && git merge main"
 alias gs="git stash"
 alias gsp="git stash pop"
-alias gb="git for-each-ref --sort=-creatordate --format='%(creatordate:short) %(refname:short)' refs/heads/"
-alias gum="git checkout main && git fetch origin main && git merge FETCH_HEAD && git checkout -"
-alias gummy="gum && git rebase main"
 
 # Usage: gb_special [<args>]
 # Arguments:
@@ -92,6 +90,7 @@ alias gb="gb_special"
 ### Get TODOs you authored - https://twitter.com/almonk/status/1576294814831718400
 alias todo='git grep -l TODO | xargs -n1 git blame -f -n -w | grep "$(git config user.name)" | grep TODO | sed "s/.\{9\}//" | sed "s/(.*)[[:space:]]*//"'
 
+## Others
 
 # Fetch Slack thread, wrap in <details>, use accessible link as <summary> and copy into clipboard.
 # Requires gh CLI with Slack extension installed.
