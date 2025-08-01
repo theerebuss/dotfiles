@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# TODO: Investigate this:
+# gh auth setup-git
+
 password=""
 echo "Please provide your Git commit info"
 read -p "Full name: " fullName
