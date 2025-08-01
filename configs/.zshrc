@@ -32,6 +32,19 @@ fi
 
 # Aliases
 
+## Zsh
+
+alias sc="source $HOME/.zshrc"
+alias cs="code $HOME/.zshrc"
+
+# Fetch my latest .zshrc file from GitHub and merge it into the current one.
+update_zsh() {
+  curl -fsSL https://raw.githubusercontent.com/theerebuss/dotfiles/refs/heads/main/configs/.zshrc -o /tmp/.zshrc
+  code -w -d /tmp/.zshrc ~/.zshrc
+  rm /tmp/.zshrc
+  source ~/.zshrc
+}
+
 ## Git
 
 ### Delete local and remote branch
@@ -78,8 +91,6 @@ alias gb="gb_special"
 
 ### Get TODOs you authored - https://twitter.com/almonk/status/1576294814831718400
 alias todo='git grep -l TODO | xargs -n1 git blame -f -n -w | grep "$(git config user.name)" | grep TODO | sed "s/.\{9\}//" | sed "s/(.*)[[:space:]]*//"'
-
-alias sc="source $HOME/.zshrc"
 
 
 # Fetch Slack thread, wrap in <details>, use accessible link as <summary> and copy into clipboard.
