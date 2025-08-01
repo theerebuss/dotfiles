@@ -1,4 +1,4 @@
-export TZ="Europe/Prague"
+export TZ="Europe/Berlin"
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
