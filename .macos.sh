@@ -191,12 +191,6 @@ install_config_free_apps() {
     # A11y queens
     brew install --cask keycastr colour-contrast-analyser pika
 
-    ## Slack thread extension
-    gh extension install https://github.com/rneatherway/gh-slack
-
-    ## Local GH actions runner
-    gh extension install https://github.com/nektos/gh-act
-
     # Apps
     brew install visual-studio-code
     brew install spotify

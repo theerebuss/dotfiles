@@ -24,4 +24,13 @@ if $CODESPACES -eq true && test -z "$CODESPACE_DISPLAYNAME"; then
     echo "export CODESPACE_DISPLAYNAME=${codespace_name}" >>~/.zshrc
 fi
 
+## Slack thread extension
+gh extension install rneatherway/gh-slack
+
+## Local GH actions runner
+gh extension install nektos/gh-act
+
+## Cleanup branches that have been merged
+gh extension install seachicken/gh-poi
+
 source ~/.zshrc
