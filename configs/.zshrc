@@ -86,6 +86,8 @@ gb_special() {
     '
 }
 alias gb="gb_special"
+# Get top repo contributors
+alias ghc="echo \"Top contributors:\n\" && gh api repos/{owner}/{repo}/contributors --jq '.[0:3][] | .login' | cat"
 
 ### Get TODOs you authored - https://twitter.com/almonk/status/1576294814831718400
 alias todo='git grep -l TODO | xargs -n1 git blame -f -n -w | grep "$(git config user.name)" | grep TODO | sed "s/.\{9\}//" | sed "s/(.*)[[:space:]]*//"'
