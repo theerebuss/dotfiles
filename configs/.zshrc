@@ -56,8 +56,11 @@ gdb() {
 alias gl="git log"
 alias ga="git add ."
 alias gk="git checkout"
+alias gkb="git checkout -b"
+alias gp="git pull"
 alias gcf="git commit --fixup"
 alias gcane="git commit --amend --no-edit"
+alias goops="ga && gcane"
 alias gum="git checkout main && git fetch origin main && git merge FETCH_HEAD && git checkout -"
 alias gummy="gum && git merge main"
 alias gs="git stash"
@@ -87,7 +90,7 @@ gb_special() {
 }
 alias gb="gb_special"
 # Get top repo contributors
-alias ghc="echo \"Top contributors:\n\" && gh api repos/{owner}/{repo}/contributors --jq '.[0:3][] | .login' | cat"
+alias ghc="echo \"Top contributors:\n\" && gh api repos/{owner}/{repo}/contributors --jq '.[0:5][] | .login' | cat"
 
 ### Get TODOs you authored - https://twitter.com/almonk/status/1576294814831718400
 alias todo='git grep -l TODO | xargs -n1 git blame -f -n -w | grep "$(git config user.name)" | grep TODO | sed "s/.\{9\}//" | sed "s/(.*)[[:space:]]*//"'
