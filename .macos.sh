@@ -139,7 +139,7 @@ setup_mac() {
     fi
 
     if ! command -v zsh &>/dev/null; then
-        echo "Installing Oh My Zsh..."
+        echo "Installing Zsh..."
         brew install zsh
         (
             echo
@@ -147,12 +147,12 @@ setup_mac() {
         ) >>~/.zshrc
     fi
 
-    if ! command -v zsh &>/dev/null; then
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
         echo "Installing Oh My Zsh..."
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     fi
 
-    if ! command -v zsh &>/dev/null; then
+    if command -v zsh &>/dev/null; then
         echo "Setting Zsh as the default shell..."
         sudo chsh -s /bin/zsh
     else
