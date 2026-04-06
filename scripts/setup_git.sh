@@ -15,8 +15,8 @@ git config --global core.editor "code -r --wait"
 
 echo "Setting up global Git identity"
 
-git config --global user.name $fullName
-git config --global user.email $email
+git config --global user.name "$fullName"
+git config --global user.email "$email"
 
 echo "Setting up SSH key"
 
@@ -30,7 +30,7 @@ ssh_key=$(cat ~/.ssh/$key_name.pub)
 # # WSL
 # echo $ssh_key | clip.exe 2>/dev/null
 # # Mac
-# echo $ssh_key | pbcoby 2>/dev/null
+# echo $ssh_key | pbcopy 2>/dev/null
 # TODO: Automate this step
 
 github_new_ssh_url="https://github.com/settings/ssh/new"
@@ -52,11 +52,11 @@ chmod 600 ~/.ssh/$signing_key_name
 chmod 644 ~/.ssh/$signing_key_name.pub
 
 # Copy .pub and open GitHub
-signing_key=$(cat ~/.ssh/$key_name.pub)
+signing_key=$(cat ~/.ssh/$signing_key_name.pub)
 # # WSL
 # echo $signing_key | clip.exe 2>/dev/null
 # # Mac
-# echo $signing_key | pbcoby 2>/dev/null
+# echo $signing_key | pbcopy 2>/dev/null
 # TODO: Automate this step
 
 echo "Please paste it to your GitHub account's SSH keys with the 'Signing' key type."
@@ -75,9 +75,11 @@ git config --global user.signingkey "$(cat ~/.ssh/$signing_key_name.pub)"
 git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
 
 # Create SSH config file
-touch ~/.ssh/config
-echo "Host *" >>~/.ssh/config
-echo "    IdentityFile ~/.ssh/$key_name" >>~/.ssh/config
+if ! grep -q "IdentityFile ~/.ssh/$key_name" ~/.ssh/config 2>/dev/null; then
+    touch ~/.ssh/config
+    echo "Host *" >>~/.ssh/config
+    echo "    IdentityFile ~/.ssh/$key_name" >>~/.ssh/config
+fi
 
 # Add SSH key to agent
 eval $(ssh-agent)
