@@ -138,15 +138,7 @@ setup_mac() {
     if ! command -v brew &>/dev/null; then
         echo "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit 1
-    fi
-
-    if ! command -v zsh &>/dev/null; then
-        echo "Installing Zsh..."
-        brew install zsh
-        (
-            echo
-            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"'
-        ) >>~/.zshrc
+        eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
     fi
 
     if [ ! -d "$HOME/.oh-my-zsh" ]; then

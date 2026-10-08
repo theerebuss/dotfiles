@@ -6,8 +6,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export TZ="Europe/Berlin"
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
+
+# Homebrew (Apple Silicon, Intel, Linux). Before oh-my-zsh so brew completions load.
+for brew_bin in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  if [[ -x $brew_bin ]]; then
+    eval "$($brew_bin shellenv)"
+    break
+  fi
+done
+unset brew_bin
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 NPM_PACKAGES="${HOME}/.npm-packages"
@@ -26,9 +35,6 @@ source $ZSH/oh-my-zsh.sh
 ## To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
 
 # Aliases
 
