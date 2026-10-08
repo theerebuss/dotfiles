@@ -12,6 +12,9 @@ echo ""
 
 echo "Setting up VSCode as the git editor"
 git config --global core.editor "code -r --wait"
+git config --global init.defaultBranch main
+git config --global push.autoSetupRemote true
+git config --global rebase.autosquash true # pairs with gcf (commit --fixup)
 
 echo "Setting up global Git identity"
 
