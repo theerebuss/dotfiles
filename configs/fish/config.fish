@@ -37,6 +37,9 @@ function update_dotfiles -d "Pull the latest dotfiles and restart fish"
 end
 
 if status is-interactive
+    # Command-line colors from configs/fish/themes, linked into ~/.config/fish/themes by scripts/install.sh
+    test -f $__fish_config_dir/themes/fisheries.theme; and fish_config theme choose fisheries
+
     if command -q starship
         starship init fish | source
         enable_transience # past prompts shrink to ❯ so scrollback stays tidy
