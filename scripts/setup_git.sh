@@ -73,6 +73,8 @@ awk '{ print $3 " " $1 " " $2 }' ~/.ssh/$signing_key_name.pub >>~/.ssh/allowed_s
 git config --global gpg.format ssh
 git config --global user.signingkey "$(cat ~/.ssh/$signing_key_name.pub)"
 git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
+git config --global commit.gpgsign true
+git config --global tag.gpgsign true
 
 # Create SSH config file
 if ! grep -q "IdentityFile ~/.ssh/$key_name" ~/.ssh/config 2>/dev/null; then
