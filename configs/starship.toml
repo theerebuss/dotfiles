@@ -44,6 +44,9 @@ style = "yellow"
 success_symbol = "[❯](76)"
 error_symbol = "[❯](196)"
 
+[cmd_duration]
+format = "[🕐 $duration]($style) "
+
 [status]
 disabled = false
 
