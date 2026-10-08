@@ -1,7 +1,7 @@
 #!/bin/bash
 exec > >(tee -i $HOME/dotfiles_install.log)
 exec 2>&1
-set -x
+set -euxo pipefail
 
 echo "Start install dotfiles as $(id -un)"
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
