@@ -144,3 +144,6 @@ EOF
 
   echo "Slack thread copied to clipboard."
 }
+
+# Machine-specific overrides, not tracked
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
