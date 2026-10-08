@@ -5,8 +5,7 @@ if ! command -v brew &>/dev/null; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit 1
 fi
 
-ZSH=$(eval "which zsh")
-sudo chsh -s $ZSH
+sudo chsh -s "$(command -v zsh)" "$(id -un)"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 

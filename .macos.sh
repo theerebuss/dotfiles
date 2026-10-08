@@ -154,12 +154,9 @@ setup_mac() {
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     fi
 
-    if command -v zsh &>/dev/null; then
+    if [ "$SHELL" != "/bin/zsh" ]; then
         echo "Setting Zsh as the default shell..."
-        sudo chsh -s /bin/zsh
-    else
-        echo "Zsh was not installed correctly"
-        return 1
+        sudo chsh -s /bin/zsh "$(id -un)"
     fi
 
     if ! command -v gh &>/dev/null; then
