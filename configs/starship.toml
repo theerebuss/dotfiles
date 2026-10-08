@@ -1,7 +1,7 @@
 # Prompt config, linked to ~/.config/starship.toml by scripts/install.sh. Options: https://starship.rs/config/
 # Same layout as the old powerlevel10k one: Codespace, folder and git on the left, details on the right.
 
-format = "${env_var.CODESPACE_DISPLAYNAME}$hostname$directory$git_branch${custom.dirty}$git_status$git_state$character"
+format = "${env_var.CODESPACE_DISPLAYNAME}$hostname$directory$git_branch$git_status${custom.dirty}$git_state$character"
 right_format = "$status$cmd_duration$jobs$time"
 
 [env_var.CODESPACE_DISPLAYNAME]
@@ -18,14 +18,6 @@ format = "🏠 "
 [git_branch]
 format = "[$branch(:$remote_branch)]($style) "
 
-# ● when anything is uncommitted: changed, staged or new files. Run `git status` for details.
-[custom.dirty]
-require_repo = true
-when = 'test -n "$(git status --porcelain)"'
-shell = ["sh"]
-format = "[●]($style) "
-style = "yellow"
-
 # Arrows only: ⇡ commits to push, ⇣ commits to pull
 [git_status]
 format = "([$ahead_behind]($style) )"
@@ -33,6 +25,14 @@ style = "bold purple" # same as the branch name
 ahead = "⇡"
 behind = "⇣"
 diverged = "⇡⇣"
+
+# ● when anything is uncommitted: changed, staged or new files. Run `git status` for details.
+[custom.dirty]
+require_repo = true
+when = 'test -n "$(git status --porcelain)"'
+shell = ["sh"]
+format = "[●]($style) "
+style = "yellow"
 
 [status]
 disabled = false
