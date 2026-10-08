@@ -34,4 +34,12 @@ Windows, from an elevated PowerShell:
 powershell -ExecutionPolicy Bypass -File .windows.ps1
 ```
 
+## Shell
+
+fish with a [starship](https://starship.rs) prompt. zsh with oh-my-zsh stays installed as a fallback and for Codespaces.
+
+- `configs/fish/config.fish` is the fish config. Settings for one machine only go in `~/.config/fish/conf.d/local.fish`.
+- `configs/starship.toml` is the prompt.
+- Shortcuts are abbreviations: add `abbr -a gk git checkout` to the config and `gk` expands as you type.
+
 Configs are symlinked into `$HOME`, so edit them in place and commit. `update_dotfiles` pulls the latest and reloads the shell. Install output is logged to `~/dotfiles_install.log`.
