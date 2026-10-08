@@ -21,10 +21,8 @@ if grep -qi microsoft /proc/version && ! grep -qs 'systemd=true' /etc/wsl.conf; 
     exit 1
 fi
 
-# Leftover symlink from Docker Desktop would shadow the apt package
-if [ -L /usr/bin/docker ] && [ ! -e /usr/bin/docker ]; then
-    sudo rm /usr/bin/docker
-fi
+# Symlinks the integration left behind: docker would shadow the apt package, the rest dangle once the app closes
+sudo find /usr/bin /usr/local/bin -maxdepth 1 -lname '/mnt/wsl/docker-desktop/*' -delete
 
 if ! dpkg -s docker-ce &>/dev/null; then
     echo "Installing Docker Engine..."
