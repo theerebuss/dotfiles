@@ -24,6 +24,3 @@ if [ ! -f "$HOME/.ssh/github_ed25519" ]; then
 fi
 
 ./scripts/install.sh
-
-# Clipboard copy tool
-sudo apt-get install xclip

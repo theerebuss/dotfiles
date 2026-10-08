@@ -121,7 +121,8 @@ slack() {
     return 1
   fi
   
-  local thread=$(gh slack read $url)
+  local thread
+  thread=$(gh slack read "$url") || return 1
 
   local output=$(cat <<EOF
 <details>
@@ -136,10 +137,12 @@ EOF
 
   if command -v pbcopy &>/dev/null; then
     echo "$output" | pbcopy
+  elif command -v clip.exe &>/dev/null; then
+    echo "$output" | clip.exe
   elif command -v xclip &>/dev/null; then
     echo "$output" | xclip -selection clipboard
   else
-    echo "No clipboard utility found. Install pbcopy (macOS) or xclip (Linux) to automatically copy the output."
+    echo "No clipboard utility found. Install xclip (Linux) to automatically copy the output."
     echo "\n$output\n"
     return 1
   fi
