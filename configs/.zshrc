@@ -19,9 +19,6 @@ done
 unset brew_bin
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-NPM_PACKAGES="${HOME}/.npm-packages"
-export PATH="$PATH:$NPM_PACKAGES/bin"
-export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # Reuse or start an ssh-agent; keys load on first use (AddKeysToAgent in ~/.ssh/config)
 zstyle :omz:plugins:ssh-agent lazy yes
