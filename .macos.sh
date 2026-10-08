@@ -142,6 +142,9 @@ setup_mac() {
         eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
     fi
 
+    echo "Installing packages from Brewfile..."
+    brew bundle --file=Brewfile
+
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
         echo "Installing Oh My Zsh..."
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -152,10 +155,6 @@ setup_mac() {
         sudo chsh -s /bin/zsh "$(id -un)"
     fi
 
-    if ! command -v gh &>/dev/null; then
-        echo "Installing GitHub CLI..."
-        brew install gh
-    fi
 
     if ! gh auth status &>/dev/null; then
         echo "Logging into GitHub CLI..."
@@ -172,48 +171,18 @@ setup_mac() {
     fi
 
     echo "Setting up Node via n..."
-    brew install n
     sudo n install lts_latest
 
     ./scripts/install.sh
 
-    echo "Installing iTerm..."
-    brew install --cask iterm2
-    # Copy iterm2 profiles and set default
+    # iTerm2 profile (iterm2 itself comes from the Brewfile)
     ITERM_PATH="$HOME/Library/Application Support/iTerm2/DynamicProfiles"
     mkdir -p $ITERM_PATH
     cp ./configs/iterm2.json "$ITERM_PATH/profiles.json"
     defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0000-0000-0000-000000000001"
 }
 
-install_config_free_apps() {
-    # A11y queens
-    brew install --cask keycastr colour-contrast-analyser pika
-
-    # Apps
-    brew install visual-studio-code
-    brew install spotify
-    brew install datweatherdoe
-    brew install firefox
-    brew install cap
-    brew install raycast
-    brew install bluesnooze # To disable bluetooth on lid close because Apple won't let us do it
-
-    ## Other tools
-    brew install slack
-    brew install notion
-    brew install 1password
-    brew install microsoft-edge google-chrome
-    brew install linear
-    brew install figma
-    brew install postgresql@17
-    brew install gcloud-cli
-    brew install docker # CLI only; the engine comes from colima or the docker-desktop cask
-    brew install docker-compose
-    brew install temporal
-}
 
 configure_macos_defaults
 ./scripts/setup_fonts.sh
 setup_mac
-install_config_free_apps
