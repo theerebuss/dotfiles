@@ -4,9 +4,25 @@
 format = "${env_var.CODESPACE_DISPLAYNAME}$hostname$directory$git_branch$git_status${custom.dirty}$git_state$character"
 right_format = "$status$cmd_duration$jobs$time"
 
+# Every prompt color, as hex so it looks the same in any terminal. The values are what
+# Windows Terminal's default Campbell theme showed before (bold colors there render brighter).
+palette = "prompt"
+
+[palettes.prompt]
+codespace = "#EFC1CC"
+path = "#61D6D6"
+path_shortened = "#3A96DD"
+branch = "#B4009E"
+changes = "#C19C00"
+arrow = "#5FD700"
+arrow_error = "#FF0000"
+exit_code = "#E74856"
+details = "#F9F1A5" # command duration, time, rebase/merge state
+jobs = "#3B78FF"
+
 [env_var.CODESPACE_DISPLAYNAME]
 format = "[🪐 $env_value]($style) "
-style = "#efc1cc"
+style = "codespace"
 
 # 🏠 outside Codespaces. The hostname module is only used for its env-var check; the name itself is hidden.
 [hostname]
@@ -18,18 +34,20 @@ format = "🏠 "
 # Inside a repo, the shrunk part before the repo name is darker.
 [directory]
 fish_style_pwd_dir_length = 1
-before_repo_root_style = "cyan"
-repo_root_style = "bold cyan"
+style = "bold path"
+before_repo_root_style = "path_shortened"
+repo_root_style = "bold path"
 read_only = " 🔒"
 
 # Just the branch name: no "on" and no icon, like the old powerlevel10k prompt
 [git_branch]
 format = "[$branch(:$remote_branch)]($style) "
+style = "bold branch"
 
 # Arrows only: ⇡ commits to push, ⇣ commits to pull
 [git_status]
 format = "([$ahead_behind]($style) )"
-style = "bold purple" # same as the branch name
+style = "bold branch" # same as the branch name
 ahead = "⇡"
 behind = "⇣"
 diverged = "⇡⇣"
@@ -40,23 +58,30 @@ require_repo = true
 when = 'test -n "$(git status --porcelain)"'
 shell = ["sh"]
 format = "[●]($style) "
-style = "yellow"
+style = "changes"
 
 # Green arrow, red after a failed command, in the same shades as powerlevel10k
 [character]
-success_symbol = "[❯](76)"
-error_symbol = "[❯](196)"
+success_symbol = "[❯](arrow)"
+error_symbol = "[❯](arrow_error)"
 
 [cmd_duration]
 format = "[⏱️ $duration]($style) " # emoji-style stopwatch (with U+FE0F) so it takes two columns everywhere
+style = "bold details"
 
 [jobs]
 symbol = "🔮" # background jobs
+style = "bold jobs"
 
 [status]
 disabled = false
 format = "[$symbol $status]($style) "
+style = "bold exit_code"
+
+[git_state]
+style = "bold details"
 
 [time]
 disabled = false
 format = "[$time]($style)"
+style = "bold details"
