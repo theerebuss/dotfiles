@@ -28,5 +28,3 @@ gh extension install rneatherway/gh-slack
 
 ## Cleanup branches that have been merged
 gh extension install seachicken/gh-poi
-
-source ~/.zshrc
