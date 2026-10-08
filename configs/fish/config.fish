@@ -40,6 +40,9 @@ if status is-interactive
     if command -q starship
         starship init fish | source
         enable_transience # past prompts shrink to ❯ so scrollback stays tidy
+        function starship_transient_prompt_func # keep the shrunk ❯ red after a failed command
+            starship module character $argv
+        end
     end
 
     # Abbreviations expand as you type. Port aliases from configs/.zshrc as you miss them, e.g.:
