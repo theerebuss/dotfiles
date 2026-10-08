@@ -1,19 +1,28 @@
-dotfiles_username="theerebuss"
-default_workspace_path="$HOME/workspace"
+#!/usr/bin/env bash
+# Bootstrap: clone (or update) the dotfiles repo. Run via:
+#   curl -fsSL https://raw.githubusercontent.com/theerebuss/dotfiles/refs/heads/main/pull.sh | bash
+set -euo pipefail
 
-# Ubuntu workaround
-if ! command -v unzip &>/dev/null && [ "$(uname)" = "Linux" ]; then
-    echo "Installing unzip..."
-    sudo apt-get update && sudo apt-get install -y unzip
+repo="https://github.com/theerebuss/dotfiles.git"
+target="${DOTFILES:-$HOME/workspace/dotfiles}"
+
+# git is the only prerequisite
+if [ "$(uname)" = "Darwin" ] && ! xcode-select -p &>/dev/null; then
+    echo "Installing Xcode command line tools..."
+    xcode-select --install &>/dev/null || true
+    until xcode-select -p &>/dev/null; do sleep 5; done
+elif ! command -v git &>/dev/null; then
+    echo "Installing git..."
+    sudo apt-get update && sudo apt-get install -y git
 fi
 
-# Setup default source code directory
-mkdir -p $default_workspace_path
-cd $default_workspace_path
+if [ -d "$target/.git" ]; then
+    echo "Updating $target..."
+    git -C "$target" pull --ff-only
+else
+    mkdir -p "$(dirname "$target")"
+    git clone "$repo" "$target"
+fi
 
-curl -L -O https://github.com/$dotfiles_username/dotfiles/archive/refs/heads/main.zip
-unzip -o main.zip
-rm main.zip
-
-mv dotfiles-main dotfiles
-cd dotfiles
+echo
+echo "Next: cd $target && ./.macos.sh   # or ./.wsl.sh"
