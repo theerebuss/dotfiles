@@ -14,6 +14,10 @@ ssh_only = false
 detect_env_vars = ["!CODESPACES"]
 format = "🏠 "
 
+# Just the branch name: no "on" and no icon, like the old powerlevel10k prompt
+[git_branch]
+format = "[$branch(:$remote_branch)]($style) "
+
 [status]
 disabled = false
 
