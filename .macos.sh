@@ -177,7 +177,7 @@ setup_mac() {
 
     # iTerm2 profile (iterm2 itself comes from the Brewfile)
     ITERM_PATH="$HOME/Library/Application Support/iTerm2/DynamicProfiles"
-    mkdir -p $ITERM_PATH
+    mkdir -p "$ITERM_PATH"
     cp ./configs/iterm2.json "$ITERM_PATH/profiles.json"
     defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0000-0000-0000-000000000001"
 }
