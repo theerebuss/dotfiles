@@ -46,12 +46,11 @@ source $ZSH/oh-my-zsh.sh
 alias sc="source $HOME/.zshrc"
 alias cs="code $HOME/.zshrc"
 
-# Fetch my latest .zshrc file from GitHub and merge it into the current one.
-update_zsh() {
-  curl -fsSL https://raw.githubusercontent.com/theerebuss/dotfiles/refs/heads/main/configs/.zshrc -o /tmp/.zshrc
-  code -w -d /tmp/.zshrc ~/.zshrc
-  rm /tmp/.zshrc
-  source ~/.zshrc
+# Repo root, resolved through the ~/.zshrc symlink
+export DOTFILES="${${:-$HOME/.zshrc}:A:h:h}"
+
+update_dotfiles() {
+  git -C "$DOTFILES" pull --ff-only && source ~/.zshrc
 }
 
 ## Git
