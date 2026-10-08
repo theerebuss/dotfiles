@@ -24,8 +24,9 @@ Set-ItemProperty -Path $bingSearchPath -Name "SearchboxTaskbarMode" -Value 1 -Ty
 # Start Menu & Taskbar
 # ============================================================
 
+$startPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+
 # Write-Host "Disabling Start Menu recommendations/suggestions..."
-# $startPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 # Set-ItemProperty -Path $startPath -Name "Start_IrisRecommendations" -Value 0 -Type DWord
 
 # Write-Host "Disabling recently added apps in Start Menu..."
