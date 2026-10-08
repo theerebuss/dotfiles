@@ -4,11 +4,26 @@
 format = "${env_var.CODESPACE_DISPLAYNAME}$hostname$directory$git_branch$git_status${custom.dirty}$git_state$character"
 right_format = "$status$cmd_duration$jobs$time"
 
-# Every prompt color, as hex so it looks the same in any terminal. The values are what
-# Windows Terminal's default Campbell theme showed before (bold colors there render brighter).
-palette = "prompt"
+# Every prompt color, as hex so it looks the same in any terminal.
+# Switch palettes by changing this name. Each palette fills the same color names.
+palette = "fisheries"
 
-[palettes.prompt]
+# Fisheries Innovation Scotland: https://www.color-hex.com/color-palette/94084
+# Blues for where you are, orange for what needs attention. Its dark navy #0d3c5c is unused: too dark on black.
+[palettes.fisheries]
+codespace = "#348bc3"
+path = "#66b2e4"
+path_shortened = "#405592"
+branch = "#348bc3"
+changes = "#f49b45"
+arrow = "#66b2e4"
+arrow_error = "#f49b45"
+exit_code = "#f49b45"
+details = "#348bc3" # command duration, time, rebase/merge state
+jobs = "#66b2e4"
+
+# What Windows Terminal's default Campbell theme showed (bold colors there render brighter)
+[palettes.campbell]
 codespace = "#EFC1CC"
 path = "#61D6D6"
 path_shortened = "#3A96DD"
