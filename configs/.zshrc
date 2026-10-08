@@ -99,7 +99,7 @@ alias gb="gb_special"
 # Get top repo contributors
 alias ghc="echo \"Top contributors:\n\" && gh api repos/{owner}/{repo}/contributors --jq '.[0:5][] | .login' | cat"
 
-### Cleanup safe Docker data to delete, nothing related to existing containers
+### Remove unused images, build cache, networks and volumes. Volumes of stopped/removed containers go too.
 alias clean-dock='docker image prune -a -f && docker volume prune -a -f && docker builder prune -a -f && docker network prune -f'
 
 ### Get TODOs you authored - https://twitter.com/almonk/status/1576294814831718400
