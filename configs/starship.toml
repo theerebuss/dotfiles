@@ -1,12 +1,18 @@
 # Prompt config, linked to ~/.config/starship.toml by scripts/install.sh. Options: https://starship.rs/config/
 # Same layout as the old powerlevel10k one: Codespace, folder and git on the left, details on the right.
 
-format = "${env_var.CODESPACE_DISPLAYNAME}$directory$git_branch$git_state$git_status$character"
+format = "${env_var.CODESPACE_DISPLAYNAME}$hostname$directory$git_branch$git_state$git_status$character"
 right_format = "$status$cmd_duration$jobs$time"
 
 [env_var.CODESPACE_DISPLAYNAME]
 format = "[🪐 $env_value]($style) "
 style = "#efc1cc"
+
+# 🏠 outside Codespaces. The hostname module is only used for its env-var check; the name itself is hidden.
+[hostname]
+ssh_only = false
+detect_env_vars = ["!CODESPACES"]
+format = "🏠 "
 
 [status]
 disabled = false
