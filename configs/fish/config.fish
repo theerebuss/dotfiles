@@ -45,6 +45,11 @@ if status is-interactive
         end
     end
 
+    # Ctrl+C leaves the terminal's ^C echo without a newline, which fish marks with ¶. End the line instead.
+    function __newline_after_ctrl_c --on-event fish_postexec
+        test $status -eq 130; and echo
+    end
+
     # Abbreviations expand as you type. Port aliases from configs/.zshrc as you miss them, e.g.:
     # abbr -a gk git checkout
 end
