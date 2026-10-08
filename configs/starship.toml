@@ -45,7 +45,7 @@ success_symbol = "[❯](76)"
 error_symbol = "[❯](196)"
 
 [cmd_duration]
-format = "[🕐 $duration]($style) "
+format = "[⏱️ $duration]($style) " # emoji-style stopwatch (with U+FE0F) so it takes two columns everywhere
 
 [status]
 disabled = false
