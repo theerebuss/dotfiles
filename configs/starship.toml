@@ -52,6 +52,7 @@ symbol = "🔮" # background jobs
 
 [status]
 disabled = false
+format = "[$symbol $status]($style) "
 
 [time]
 disabled = false
