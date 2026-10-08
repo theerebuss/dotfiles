@@ -47,6 +47,9 @@ error_symbol = "[❯](196)"
 [cmd_duration]
 format = "[⏱️ $duration]($style) " # emoji-style stopwatch (with U+FE0F) so it takes two columns everywhere
 
+[jobs]
+symbol = "🔮" # background jobs
+
 [status]
 disabled = false
 
