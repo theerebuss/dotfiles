@@ -34,6 +34,11 @@ shell = ["sh"]
 format = "[●]($style) "
 style = "yellow"
 
+# Green arrow, red after a failed command, in the same shades as powerlevel10k
+[character]
+success_symbol = "[❯](76)"
+error_symbol = "[❯](196)"
+
 [status]
 disabled = false
 
