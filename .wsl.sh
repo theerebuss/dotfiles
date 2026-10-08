@@ -6,10 +6,12 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 sudo add-apt-repository -y ppa:fish-shell/release-4
 sudo apt-get install -y fish zsh
 
-if ! command -v brew &>/dev/null; then
+if [ ! -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
 	echo "Installing Homebrew..."
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit 1
 fi
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew install starship
 
 sudo chsh -s /usr/bin/fish "$(id -un)"
 

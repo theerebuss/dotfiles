@@ -23,6 +23,7 @@ link "$REPO_DIR/configs/.zshrc" "$HOME/.zshrc"
 link "$REPO_DIR/configs/.p10k.zsh" "$HOME/.p10k.zsh"
 mkdir -p "$HOME/.config/fish/conf.d"
 link "$REPO_DIR/configs/fish/config.fish" "$HOME/.config/fish/config.fish"
+link "$REPO_DIR/configs/starship.toml" "$HOME/.config/starship.toml"
 
 if [ "${CODESPACES:-}" = true ] && [ -z "${CODESPACE_DISPLAYNAME:-}" ]; then
     codespaces=$(gh codespace list)

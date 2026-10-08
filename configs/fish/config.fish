@@ -37,6 +37,11 @@ function update_dotfiles -d "Pull the latest dotfiles and restart fish"
 end
 
 if status is-interactive
+    if command -q starship
+        starship init fish | source
+        enable_transience # past prompts shrink to ❯ so scrollback stays tidy
+    end
+
     # Abbreviations expand as you type. Port aliases from configs/.zshrc as you miss them, e.g.:
     # abbr -a gk git checkout
 end

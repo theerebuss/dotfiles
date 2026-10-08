@@ -2,6 +2,7 @@
 
 # Shell
 brew "fish"
+brew "starship"
 
 # CLI
 brew "gh"
