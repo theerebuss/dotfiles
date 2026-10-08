@@ -14,6 +14,11 @@ set -e brew
 
 fish_add_path -g ~/bin ~/.local/bin
 
+# ls colors from the same palette: folders light blue, links mid blue, programs orange, broken links indigo.
+# GNU ls only; macOS's own ls ignores this and keeps the terminal's colors.
+set -gx LS_COLORS (string join : 'di=1;38;2;102;178;228' 'ow=1;38;2;102;178;228' 'tw=1;38;2;102;178;228' \
+    'st=1;38;2;102;178;228' 'ln=38;2;52;139;195' 'ex=38;2;244;155;69' 'or=38;2;64;85;146' 'mi=38;2;64;85;146')
+
 # Repo root, found by following this file's symlink
 set -gx DOTFILES (path resolve (status filename) | path dirname | path dirname | path dirname)
 
