@@ -17,6 +17,7 @@ format = "🏠 "
 # Folders above the last three shrink to their first letter: ~/o/w/d/dartfish. Repo names stay whole.
 [directory]
 fish_style_pwd_dir_length = 1
+read_only = " 🔒"
 
 # Just the branch name: no "on" and no icon, like the old powerlevel10k prompt
 [git_branch]
