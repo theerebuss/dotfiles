@@ -19,6 +19,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 	sudo apt install gh -y
 gh auth login -s user
 
+if [ ! -f "$HOME/.ssh/github_ed25519" ]; then
+	./scripts/setup_git.sh
+fi
+
 ./scripts/install.sh
 
 # Clipboard copy tool

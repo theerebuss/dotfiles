@@ -160,9 +160,14 @@ setup_mac() {
     echo "Logging into GitHub CLI..."
     gh auth login -s user
 
-    local emails=$(gh api --method GET /user/emails --jq '.[] | "- \(.email)"' | cat)
+    local emails
+    emails=$(gh api --method GET /user/emails --jq '.[] | "- \(.email)"' | cat)
     echo "Your GitHub emails:"
     echo "$emails"
+
+    if [ ! -f "$HOME/.ssh/github_ed25519" ]; then
+        ./scripts/setup_git.sh
+    fi
 
     echo "Setting up Node via n..."
     brew install n
