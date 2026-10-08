@@ -1,5 +1,8 @@
 # brew bundle --file=Brewfile
 
+# Shell
+brew "fish"
+
 # CLI
 brew "gh"
 brew "n"

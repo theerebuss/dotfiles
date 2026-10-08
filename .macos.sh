@@ -150,9 +150,12 @@ setup_mac() {
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     fi
 
-    if [ "$SHELL" != "/bin/zsh" ]; then
-        echo "Setting Zsh as the default shell..."
-        sudo chsh -s /bin/zsh "$(id -un)"
+    local fish_path
+    fish_path="$(brew --prefix)/bin/fish"
+    if [ "$SHELL" != "$fish_path" ]; then
+        echo "Setting fish as the default shell..."
+        grep -qx "$fish_path" /etc/shells || echo "$fish_path" | sudo tee -a /etc/shells >/dev/null
+        sudo chsh -s "$fish_path" "$(id -un)"
     fi
 
 

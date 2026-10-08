@@ -2,14 +2,16 @@
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-sudo apt-get update && sudo apt-get install -y zsh
+# fish 4 from the fish team's PPA (Ubuntu's own package is 3.7). zsh stays as a fallback.
+sudo add-apt-repository -y ppa:fish-shell/release-4
+sudo apt-get install -y fish zsh
 
 if ! command -v brew &>/dev/null; then
 	echo "Installing Homebrew..."
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit 1
 fi
 
-sudo chsh -s "$(command -v zsh)" "$(id -un)"
+sudo chsh -s /usr/bin/fish "$(id -un)"
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
