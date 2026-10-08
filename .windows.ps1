@@ -1,6 +1,6 @@
 #Requires -RunAsAdministrator
 # Windows debloat and configuration script
-# Run in an elevated PowerShell: powershell -ExecutionPolicy Bypass -File setup_windows.ps1
+# Run in an elevated PowerShell: powershell -ExecutionPolicy Bypass -File .windows.ps1
 
 Write-Host "Starting Windows setup..." -ForegroundColor Cyan
 
