@@ -18,7 +18,9 @@ $bingSearchPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"
 Set-ItemProperty -Path $bingSearchPath -Name "BingSearchEnabled" -Value 0 -Type DWord
 
 Write-Host "Disabling search highlights (trending searches)..."
-Set-ItemProperty -Path $bingSearchPath -Name "SearchboxTaskbarMode" -Value 1 -Type DWord
+$searchSettingsPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\SearchSettings"
+if (-not (Test-Path $searchSettingsPath)) { New-Item -Path $searchSettingsPath -Force | Out-Null }
+Set-ItemProperty -Path $searchSettingsPath -Name "IsDynamicSearchBoxEnabled" -Value 0 -Type DWord
 
 # ============================================================
 # Start Menu & Taskbar
