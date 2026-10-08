@@ -5,9 +5,9 @@
 
 password=""
 echo "Please provide your Git commit info"
-read -p "Full name: " fullName
-read -p "Email: " email
-read -p "Key password: " -s password
+read -rp "Full name: " fullName
+read -rp "Email: " email
+read -rsp "Key passphrase (empty for none): " password
 echo ""
 
 echo "Setting up VSCode as the git editor"
@@ -21,7 +21,7 @@ git config --global user.email "$email"
 echo "Setting up SSH key"
 
 key_name="github_ed25519"
-ssh-keygen -t ed25519 -C $email -f ~/.ssh/$key_name -N $password
+ssh-keygen -t ed25519 -C "$email" -f ~/.ssh/"$key_name" -N "$password"
 chmod 600 ~/.ssh/$key_name
 chmod 644 ~/.ssh/$key_name.pub
 
@@ -42,12 +42,12 @@ explorer.exe $github_new_ssh_url 2>/dev/null
 # Mac
 open $github_new_ssh_url 2>/dev/null
 
-read -p "Press any key to resume..."
+read -rp "Press Enter to continue..."
 
 echo "Setting up SSH signing key"
 
 signing_key_name="github_signing_ed25519"
-ssh-keygen -t ed25519 -C $email -f ~/.ssh/$signing_key_name -N $password
+ssh-keygen -t ed25519 -C "$email" -f ~/.ssh/"$signing_key_name" -N "$password"
 chmod 600 ~/.ssh/$signing_key_name
 chmod 644 ~/.ssh/$signing_key_name.pub
 
@@ -66,7 +66,7 @@ explorer.exe https://github.com/settings/ssh/new 2>/dev/null
 # Mac
 open https://github.com/settings/ssh/new 2>/dev/null
 
-read -p "Press any key to resume..."
+read -rp "Press Enter to continue..."
 
 awk '{ print $3 " " $1 " " $2 }' ~/.ssh/$signing_key_name.pub >>~/.ssh/allowed_signers
 
