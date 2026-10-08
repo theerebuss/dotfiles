@@ -157,8 +157,10 @@ setup_mac() {
         brew install gh
     fi
 
-    echo "Logging into GitHub CLI..."
-    gh auth login -s user
+    if ! gh auth status &>/dev/null; then
+        echo "Logging into GitHub CLI..."
+        gh auth login -s user
+    fi
 
     local emails
     emails=$(gh api --method GET /user/emails --jq '.[] | "- \(.email)"' | cat)
