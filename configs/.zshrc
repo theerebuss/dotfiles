@@ -60,8 +60,7 @@ update_zsh() {
 
 ### Delete local and remote branch
 gdb() {
-    git branch -d $1
-    git push origin --delete $1
+    git branch -d "$1" && git push origin --delete "$1"
 }
 
 alias gl="git log"
