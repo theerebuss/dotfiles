@@ -29,6 +29,7 @@ style = "yellow"
 # Arrows only: ⇡ commits to push, ⇣ commits to pull
 [git_status]
 format = "([$ahead_behind]($style) )"
+style = "bold purple" # same as the branch name
 ahead = "⇡"
 behind = "⇣"
 diverged = "⇡⇣"
