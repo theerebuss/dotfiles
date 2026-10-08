@@ -23,8 +23,13 @@ NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
+# Reuse or start an ssh-agent; keys load on first use (AddKeysToAgent in ~/.ssh/config)
+zstyle :omz:plugins:ssh-agent lazy yes
+zstyle :omz:plugins:ssh-agent quiet yes
+
 plugins=(
     git
+    ssh-agent
     zsh-z
     zsh-syntax-highlighting
     zsh-autosuggestions

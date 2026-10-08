@@ -76,14 +76,22 @@ git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
 git config --global commit.gpgsign true
 git config --global tag.gpgsign true
 
-# Create SSH config file
+# SSH config: keys are added to the agent on first use; macOS also keeps them in the keychain
 if ! grep -q "IdentityFile ~/.ssh/$key_name" ~/.ssh/config 2>/dev/null; then
-    touch ~/.ssh/config
-    echo "Host *" >>~/.ssh/config
-    echo "    IdentityFile ~/.ssh/$key_name" >>~/.ssh/config
+    cat >>~/.ssh/config <<EOF
+Host *
+    AddKeysToAgent yes
+    IgnoreUnknown UseKeychain
+    UseKeychain yes
+    IdentityFile ~/.ssh/$key_name
+EOF
 fi
+chmod 600 ~/.ssh/config
 
-# Add SSH key to agent
-eval $(ssh-agent)
-ssh-add ~/.ssh/$key_name
-ssh-add ~/.ssh/$signing_key_name
+# Load the keys into the agent now
+if [ "$(uname)" = "Darwin" ]; then
+    ssh-add --apple-use-keychain ~/.ssh/"$key_name" ~/.ssh/"$signing_key_name"
+else
+    [ -n "${SSH_AUTH_SOCK:-}" ] || eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/"$key_name" ~/.ssh/"$signing_key_name"
+fi
