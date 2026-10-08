@@ -3,7 +3,11 @@
 # https://docs.docker.com/engine/install/ubuntu/
 set -euo pipefail
 
-if [ -d /mnt/wsl/docker-desktop ]; then
+# Desktop's mount (/mnt/wsl/docker-desktop) is shared by every distro while the app runs,
+# so look for the per-distro integration itself: its proxy process and bind mounts.
+# The [d] stops pgrep from matching a shell whose command line quotes this pattern.
+if pgrep -f '[d]ocker-desktop-user-distro|[d]ocker-desktop-proxy' >/dev/null ||
+    [ -d "/mnt/wsl/docker-desktop-bind-mounts/${WSL_DISTRO_NAME:-}" ]; then
     echo "Docker Desktop's WSL integration is active for this distro."
     echo "Turn it off first (Docker Desktop > Settings > Resources > WSL integration),"
     echo "run 'wsl --shutdown' from Windows, reopen the distro and re-run this script."
