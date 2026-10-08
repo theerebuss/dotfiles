@@ -21,11 +21,14 @@ link() {
 }
 link "$REPO_DIR/configs/.zshrc" "$HOME/.zshrc"
 link "$REPO_DIR/configs/.p10k.zsh" "$HOME/.p10k.zsh"
+mkdir -p "$HOME/.config/fish/conf.d"
+link "$REPO_DIR/configs/fish/config.fish" "$HOME/.config/fish/config.fish"
 
 if [ "${CODESPACES:-}" = true ] && [ -z "${CODESPACE_DISPLAYNAME:-}" ]; then
     codespaces=$(gh codespace list)
     codespace_name=$(echo "$codespaces" | awk '{print $1, $2}' | grep "$CODESPACE_NAME" | awk '{print $2}')
     echo "export CODESPACE_DISPLAYNAME=${codespace_name}" >>~/.zshrc.local
+    echo "set -gx CODESPACE_DISPLAYNAME ${codespace_name}" >>~/.config/fish/conf.d/local.fish
 fi
 
 gh_ext() { gh extension list 2>/dev/null | grep -q "$1" || gh extension install "$1"; }
