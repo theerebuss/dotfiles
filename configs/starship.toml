@@ -15,8 +15,11 @@ detect_env_vars = ["!CODESPACES"]
 format = "🏠 "
 
 # Folders above the last three shrink to their first letter: ~/o/w/d/dartfish. Repo names stay whole.
+# Inside a repo, the shrunk part before the repo name is darker.
 [directory]
 fish_style_pwd_dir_length = 1
+before_repo_root_style = "cyan"
+repo_root_style = "bold cyan"
 read_only = " 🔒"
 
 # Just the branch name: no "on" and no icon, like the old powerlevel10k prompt
