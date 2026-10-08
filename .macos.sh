@@ -126,12 +126,14 @@ configure_macos_defaults() {
 }
 
 setup_mac() {
-    echo "Installing Xcode command line tools..."
-    echo "Please follow the instructions in the pop-up window to continue."
-    sudo xcode-select --install &>/dev/null
-    until $(xcode-select --print-path &>/dev/null); do
-        sleep 5
-    done
+    if ! xcode-select -p &>/dev/null; then
+        echo "Installing Xcode command line tools..."
+        echo "Please follow the instructions in the pop-up window to continue."
+        xcode-select --install &>/dev/null || true
+        until xcode-select -p &>/dev/null; do
+            sleep 5
+        done
+    fi
 
     if ! command -v brew &>/dev/null; then
         echo "Installing Homebrew..."
