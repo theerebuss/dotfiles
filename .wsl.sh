@@ -32,3 +32,6 @@ if [ ! -f "$HOME/.ssh/github_ed25519" ]; then
 fi
 
 ./scripts/install.sh
+
+# Docker Engine instead of Docker Desktop
+./scripts/setup_docker.sh
