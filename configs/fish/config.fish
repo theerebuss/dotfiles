@@ -90,6 +90,7 @@ if status is-interactive
     end
 
     # Abbreviations expand as you type, e.g.:
+    abbr -a l ls -lah
     abbr -a gl git log
     abbr -a ga git add .
     abbr -a gk git checkout
