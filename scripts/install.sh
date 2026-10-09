@@ -17,6 +17,12 @@ link "$REPO_DIR/configs/starship.toml" "$HOME/.config/starship.toml"
 mkdir -p "$HOME/.config/fish/themes"
 link "$REPO_DIR/configs/fish/themes/fisheries.theme" "$HOME/.config/fish/themes/fisheries.theme"
 
+# fish waits ~10 s for terminals that never answer its startup queries, like Orca's background ones.
+# It's a feature flag read before any config, so it's stored once per machine.
+if command -v fish >/dev/null; then
+    fish -c 'contains -- no-query-term $fish_features; or set -Ua fish_features no-query-term' || true
+fi
+
 if [ "${CODESPACES:-}" = true ] && [ -z "${CODESPACE_DISPLAYNAME:-}" ]; then
     codespaces=$(gh codespace list)
     codespace_name=$(echo "$codespaces" | awk '{print $1, $2}' | grep "$CODESPACE_NAME" | awk '{print $2}')
