@@ -6,8 +6,6 @@
 >
 > Without me, my dotfiles is useless. Without my dotfiles, I am useless.
 
-<img width="591" height="217" alt="screenshot of terminal showcasing color palette" src="https://github.com/user-attachments/assets/401f252b-667c-4626-8731-c2e9cb7b98c4" />
-
 ## Supported platforms
 
 - macOS
@@ -40,3 +38,5 @@ powershell -ExecutionPolicy Bypass -File .windows.ps1
 ## Shell
 
 [fish](https://github.com/fish-shell/fish-shell) with a [starship](https://starship.rs) prompt and a custom fishy theme.
+
+<img width="591" height="217" alt="screenshot of terminal showcasing color palette" src="https://github.com/user-attachments/assets/401f252b-667c-4626-8731-c2e9cb7b98c4" />
