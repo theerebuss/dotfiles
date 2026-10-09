@@ -10,6 +10,7 @@
 
 - macOS
 - Linux (Debian/Ubuntu) / WSL
+- Alpine (Raspberry Pi)
 - Windows (debloat, PowerShell)
 
 ## Usage
@@ -26,6 +27,13 @@ Then run the script for your platform:
 cd ~/workspace/dotfiles
 ./.macos.sh # macOS
 ./.wsl.sh   # WSL / Ubuntu
+```
+
+Alpine has no bash until the script installs it, so clone with git and run the script through doas:
+
+```sh
+git clone https://github.com/theerebuss/dotfiles.git ~/workspace/dotfiles
+cd ~/workspace/dotfiles && doas ./.alpine.sh
 ```
 
 Windows, from an elevated PowerShell:
