@@ -1,16 +1,16 @@
 # Prompt config, linked to ~/.config/starship.toml by scripts/install.sh. Options: https://starship.rs/config/
-# Codespace, folder and git on the left, details on the right.
+# Where you are (🏠 this machine, 🪐 a Codespace, 🍓 a host over SSH), folder and git on the left, details on the right.
 
 palette = "fisheries"
 
-format = "${env_var.CODESPACE_DISPLAYNAME}$hostname$directory$git_branch$git_status${custom.dirty}$git_state$character"
+format = "${custom.home}${env_var.CODESPACE_DISPLAYNAME}$hostname$directory$git_branch$git_status${custom.dirty}$git_state$character"
 right_format = "$status$cmd_duration$jobs$time"
 
 # Fisheries Innovation Scotland
 # https://www.color-hex.com/color-palette/94084
 # Blues for where you are, orange for what needs attention.
 [palettes.fisheries]
-codespace = "#348bc3"
+machine = "#348bc3"
 path = "#66b2e4"
 path_shortened = "#405592"
 branch = "#348bc3"
@@ -21,16 +21,23 @@ exit_code = "#f49b45"
 details = "#348bc3" # command duration, time, rebase/merge state
 jobs = "#66b2e4"
 
+# 🏠 on this machine (WSL, macOS): neither a Codespace nor an SSH session
+[custom.home]
+when = 'test -z "$CODESPACES$SSH_CONNECTION$SSH_CLIENT$SSH_TTY"'
+shell = ["sh"]
+format = "🏠 "
+
 [env_var.CODESPACE_DISPLAYNAME]
 format = "[🪐 $env_value]($style) "
-style = "codespace"
+style = "machine"
 
-# 🏠 for local
-# hostname module only used for its env-var check
+# 🍓 ceres over SSH: the hostname is always there so you remember you're remoting.
+# A Codespace has its own tile above, even when reached over SSH.
 [hostname]
-ssh_only = false
+ssh_symbol = "🍓 "
 detect_env_vars = ["!CODESPACES"]
-format = "🏠 "
+format = "[$ssh_symbol$hostname]($style) "
+style = "machine"
 
 # Shrink long paths
 [directory]
