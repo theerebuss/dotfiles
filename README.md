@@ -10,7 +10,7 @@
 
 - macOS
 - Linux (Debian/Ubuntu) / WSL
-- Windows (debloat and fonts, PowerShell)
+- Windows (debloat, PowerShell)
 
 ## Usage
 

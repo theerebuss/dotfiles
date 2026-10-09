@@ -155,20 +155,6 @@ Write-Host "Disabling snap assist flyout..."
 Set-ItemProperty -Path $startPath -Name "SnapAssist" -Value 0 -Type DWord
 
 # ============================================================
-# Fonts (MesloLGS NF, for powerlevel10k in Windows Terminal)
-# ============================================================
-
-Write-Host "Installing MesloLGS NF fonts..."
-$fontsFolder = (New-Object -ComObject Shell.Application).Namespace(0x14)
-foreach ($variant in "Regular", "Bold", "Italic", "Bold Italic") {
-    $name = "MesloLGS NF $variant.ttf"
-    if (Test-Path "$env:windir\Fonts\$name") { continue }
-    $tmp = Join-Path $env:TEMP $name
-    Invoke-WebRequest -Uri "https://github.com/romkatv/powerlevel10k-media/raw/master/$([uri]::EscapeDataString($name))" -OutFile $tmp
-    $fontsFolder.CopyHere($tmp, 0x14)
-}
-
-# ============================================================
 # Restart Explorer
 # ============================================================
 

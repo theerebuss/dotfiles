@@ -182,5 +182,4 @@ setup_mac() {
 
 
 configure_macos_defaults
-./scripts/setup_fonts.sh
 setup_mac
