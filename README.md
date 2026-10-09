@@ -6,12 +6,14 @@
 >
 > Without me, my dotfiles is useless. Without my dotfiles, I am useless.
 
+<img width="591" height="217" alt="screenshot of terminal showcasing color palette" src="https://github.com/user-attachments/assets/401f252b-667c-4626-8731-c2e9cb7b98c4" />
+
 ## Supported platforms
 
 - macOS
-- Linux (Debian/Ubuntu) / WSL
+- Ubuntu (WSL)
 - Alpine (Raspberry Pi)
-- Windows (debloat, PowerShell)
+- Windows (debloat)
 
 ## Usage
 
@@ -29,14 +31,7 @@ cd ~/workspace/dotfiles
 ./.wsl.sh   # WSL / Ubuntu
 ```
 
-Alpine has no bash until the script installs it, so clone with git and run the script through doas:
-
-```sh
-git clone https://github.com/theerebuss/dotfiles.git ~/workspace/dotfiles
-cd ~/workspace/dotfiles && doas ./.alpine.sh
-```
-
-Windows, from an elevated PowerShell:
+Windows (elevated PowerShell):
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .windows.ps1
@@ -44,10 +39,4 @@ powershell -ExecutionPolicy Bypass -File .windows.ps1
 
 ## Shell
 
-fish with a [starship](https://starship.rs) prompt.
-
-- `configs/fish/config.fish` is the fish config. Settings for one machine only go in `~/.config/fish/conf.d/local.fish`.
-- `configs/starship.toml` is the prompt.
-- Shortcuts are abbreviations: add `abbr -a gk git checkout` to the config and `gk` expands as you type.
-
-Configs are symlinked into `$HOME`, so edit them in place and commit. `update_dotfiles` pulls the latest and reloads the shell. Install output is logged to `~/dotfiles_install.log`.
+[fish](https://github.com/fish-shell/fish-shell) with a [starship](https://starship.rs) prompt and a custom fishy theme.
