@@ -38,6 +38,7 @@ function update_dotfiles -d "Pull the latest dotfiles and restart fish"
     git -C $DOTFILES pull --ff-only; and exec fish
 end
 
+
 if status is-interactive
     # Apply dope ass theme
     test -f $__fish_config_dir/themes/fisheries.theme; and fish_config theme choose fisheries
@@ -57,6 +58,10 @@ if status is-interactive
     end
 
     # Abbreviations expand as you type, e.g.:
-    # abbr -a gk git checkout
-    # Old zsh aliases to port: git show 2e5b220:configs/.zshrc
+    abbr -a gl git log
+    abbr -a ga git add .
+    abbr -a gk git checkout
+    abbr -a gp git pull
+    abbr -a gcane git commit --amend --no-edit
+    abbr -a gs git stash
 end
