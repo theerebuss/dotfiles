@@ -9,8 +9,8 @@ right_format = "$status$cmd_duration$jobs$time"
 # Fisheries Innovation Scotland
 # https://www.color-hex.com/color-palette/94084
 # Blues for where you are, orange for what needs attention.
+# The 🪐 and 🍓 tiles are the exception: they take their emoji's own colour.
 [palettes.fisheries]
-machine = "#348bc3"
 path = "#66b2e4"
 path_shortened = "#405592"
 branch = "#348bc3"
@@ -29,7 +29,7 @@ format = "🏠 "
 
 [env_var.CODESPACE_DISPLAYNAME]
 format = "[🪐 $env_value]($style) "
-style = "machine"
+style = "#f39d2b" # the planet's orange (Segoe UI Emoji, Apple's is close; Noto's is tan)
 
 # 🍓 ceres over SSH: the hostname is always there so you remember you're remoting.
 # A Codespace has its own tile above, even when reached over SSH.
@@ -37,7 +37,7 @@ style = "machine"
 ssh_symbol = "🍓 "
 detect_env_vars = ["!CODESPACES"]
 format = "[$ssh_symbol$hostname]($style) "
-style = "machine"
+style = "#f8312f" # the strawberry's red (same in Segoe UI Emoji, Apple and Noto)
 
 # Shrink long paths
 [directory]
