@@ -145,11 +145,6 @@ setup_mac() {
     echo "Installing packages from Brewfile..."
     brew bundle --file=Brewfile
 
-    if [ ! -d "$HOME/.oh-my-zsh" ]; then
-        echo "Installing Oh My Zsh..."
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    fi
-
     local fish_path
     fish_path="$(brew --prefix)/bin/fish"
     if [ "$SHELL" != "$fish_path" ]; then

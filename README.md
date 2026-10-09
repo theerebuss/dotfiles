@@ -36,7 +36,7 @@ powershell -ExecutionPolicy Bypass -File .windows.ps1
 
 ## Shell
 
-fish with a [starship](https://starship.rs) prompt. zsh with oh-my-zsh stays installed as a fallback and for Codespaces.
+fish with a [starship](https://starship.rs) prompt.
 
 - `configs/fish/config.fish` is the fish config. Settings for one machine only go in `~/.config/fish/conf.d/local.fish`.
 - `configs/starship.toml` is the prompt.

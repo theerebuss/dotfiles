@@ -2,9 +2,9 @@
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-# fish 4 from the fish team's PPA (Ubuntu's own package is 3.7). zsh stays as a fallback.
+# fish 4 from the fish team's PPA (Ubuntu's own package is 3.7)
 sudo add-apt-repository -y ppa:fish-shell/release-4
-sudo apt-get install -y fish zsh
+sudo apt-get install -y fish
 
 if [ ! -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
 	echo "Installing Homebrew..."
@@ -14,10 +14,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew install starship
 
 sudo chsh -s /usr/bin/fish "$(id -un)"
-
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
 
 if ! command -v gh &>/dev/null; then
 	# https://github.com/cli/cli/blob/trunk/docs/install_linux.md
