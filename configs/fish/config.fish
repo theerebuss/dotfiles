@@ -38,6 +38,42 @@ function update_dotfiles -d "Pull the latest dotfiles and restart fish"
     git -C $DOTFILES pull --ff-only; and exec fish
 end
 
+function gdb -d "Delete a branch locally, then on origin"
+    git branch -d $argv[1]; and git push origin --delete $argv[1]
+end
+
+function gb -d "Branches by creation date, current one highlighted. With arguments, plain git branch"
+    if set -q argv[1]
+        git branch $argv
+    else
+        git for-each-ref --sort=-creatordate refs/heads/ \
+            --format='%(if)%(HEAD)%(then)%(color:#348bc3 bold ul)%(end)%(creatordate:format:%Y-%m-%d %H:%M:%S) %(refname:short)%(color:reset)'
+    end
+end
+
+function slack -d "Copy a Slack thread as a collapsible <details> block (needs gh-slack)"
+    if not set -q argv[1]
+        echo "Usage: slack <slack_url>"
+        return 1
+    end
+    set -l url $argv[1]
+    set -l thread "$(gh slack read $url)"; or return 1
+
+    set -l copy
+    if command -q pbcopy
+        set copy pbcopy
+    else if command -q clip.exe
+        set copy clip.exe
+    else if command -q xclip
+        set copy xclip -selection clipboard
+    else
+        echo "No clipboard tool found (pbcopy, clip.exe or xclip)"
+        return 1
+    end
+
+    printf '<details>\n  <summary>\n    <a href="%s">Slack thread</a>\n  </summary>\n\n%s\n</details>\n' $url $thread | $copy
+    and echo "Slack thread copied to clipboard."
+end
 
 if status is-interactive
     # Apply dope ass theme
