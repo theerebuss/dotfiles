@@ -22,19 +22,6 @@ exit_code = "#f49b45"
 details = "#348bc3" # command duration, time, rebase/merge state
 jobs = "#66b2e4"
 
-# What Windows Terminal's default Campbell theme showed (bold colors there render brighter)
-[palettes.campbell]
-codespace = "#EFC1CC"
-path = "#61D6D6"
-path_shortened = "#3A96DD"
-branch = "#B4009E"
-changes = "#C19C00"
-arrow = "#5FD700"
-arrow_error = "#FF0000"
-exit_code = "#E74856"
-details = "#F9F1A5" # command duration, time, rebase/merge state
-jobs = "#3B78FF"
-
 [env_var.CODESPACE_DISPLAYNAME]
 format = "[🪐 $env_value]($style) "
 style = "codespace"
