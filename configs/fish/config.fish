@@ -3,6 +3,8 @@
 
 set -g fish_greeting # no welcome message
 
+set -gx TZ Europe/Berlin
+
 # Homebrew (Apple Silicon, Intel, Linux)
 for brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew
     if test -x $brew
@@ -23,7 +25,6 @@ set -gx LS_COLORS (string join : 'di=1;38;2;102;178;228' 'ow=1;38;2;102;178;228'
 set -gx DOTFILES (path resolve (status filename) | path dirname | path dirname | path dirname)
 
 if set -q CODESPACES
-    set -gx TZ Europe/Berlin # Codespaces default to UTC
     set -q CODESPACE_DISPLAYNAME; or set -gx CODESPACE_DISPLAYNAME $CODESPACE_NAME
 end
 
