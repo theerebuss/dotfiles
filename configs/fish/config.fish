@@ -38,10 +38,6 @@ function update_dotfiles -d "Pull the latest dotfiles and restart fish"
     git -C $DOTFILES pull --ff-only; and exec fish
 end
 
-function gdb -d "Delete a branch locally, then on origin"
-    git branch -d $argv[1]; and git push origin --delete $argv[1]
-end
-
 function gb -d "Branches by creation date, current one highlighted. With arguments, plain git branch"
     if set -q argv[1]
         git branch $argv
