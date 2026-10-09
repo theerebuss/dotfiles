@@ -89,6 +89,9 @@ if status is-interactive
         test $status -eq 130; and echo
     end
 
+    # Ctrl+K clears the screen and scrollback, like Cmd+K in iTerm
+    bind ctrl-k 'clear; commandline -f repaint'
+
     # Abbreviations expand as you type, e.g.:
     abbr -a l ls -lah
     abbr -a gl git log
