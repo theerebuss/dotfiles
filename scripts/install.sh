@@ -23,6 +23,9 @@ if [ "${CODESPACES:-}" = true ] && [ -z "${CODESPACE_DISPLAYNAME:-}" ]; then
     echo "set -gx CODESPACE_DISPLAYNAME ${codespace_name}" >>~/.config/fish/conf.d/local.fish
 fi
 
-gh_ext() { gh extension list 2>/dev/null | grep -q "$1" || gh extension install "$1"; }
-gh_ext rneatherway/gh-slack # Fetch Slack threads
-gh_ext seachicken/gh-poi    # Delete merged branches
+# gh extensions need a logged-in gh; skip them otherwise (e.g. a non-root user on the Pi)
+if gh auth status >/dev/null 2>&1; then
+    gh_ext() { gh extension list 2>/dev/null | grep -q "$1" || gh extension install "$1"; }
+    gh_ext rneatherway/gh-slack # Fetch Slack threads
+    gh_ext seachicken/gh-poi    # Delete merged branches
+fi
