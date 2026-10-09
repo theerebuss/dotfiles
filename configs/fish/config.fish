@@ -1,6 +1,3 @@
-# fish config, linked to ~/.config/fish/config.fish by scripts/install.sh.
-# Settings for one machine only go in ~/.config/fish/conf.d/local.fish (not tracked).
-
 set -g fish_greeting # no welcome message
 
 set -gx TZ Europe/Berlin
@@ -16,8 +13,7 @@ set -e brew
 
 fish_add_path -g ~/bin ~/.local/bin
 
-# ls colors from the same palette: folders light blue, links mid blue, programs orange, broken links indigo.
-# GNU ls only; macOS's own ls ignores this and keeps the terminal's colors.
+# ls colors override
 set -gx LS_COLORS (string join : 'di=1;38;2;102;178;228' 'ow=1;38;2;102;178;228' 'tw=1;38;2;102;178;228' \
     'st=1;38;2;102;178;228' 'ln=38;2;52;139;195' 'ex=38;2;244;155;69' 'or=38;2;64;85;146' 'mi=38;2;64;85;146')
 
@@ -43,18 +39,19 @@ function update_dotfiles -d "Pull the latest dotfiles and restart fish"
 end
 
 if status is-interactive
-    # Command-line colors from configs/fish/themes, linked into ~/.config/fish/themes by scripts/install.sh
+    # Apply dope ass theme
     test -f $__fish_config_dir/themes/fisheries.theme; and fish_config theme choose fisheries
 
     if command -q starship
         starship init fish | source
-        enable_transience # past prompts shrink to ❯ so scrollback stays tidy
-        function starship_transient_prompt_func # keep the shrunk ❯ red after a failed command
+        enable_transience
+        # keep the ❯ red after a failed command
+        function starship_transient_prompt_func
             starship module character $argv
         end
     end
 
-    # Ctrl+C leaves the terminal's ^C echo without a newline, which fish marks with ¶. End the line instead.
+    # Ctrl+C leaves the echo without a newline, which fish marks with ¶, so we remove it because it's ugly
     function __newline_after_ctrl_c --on-event fish_postexec
         test $status -eq 130; and echo
     end

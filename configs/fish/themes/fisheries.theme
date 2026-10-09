@@ -1,6 +1,6 @@
 # name: 'Fisheries Innovation Scotland'
 # preferred_background: 0c0c0c
-# Command-line colors from the same palette as configs/starship.toml: https://www.color-hex.com/color-palette/94084
+# Colors from: https://www.color-hex.com/color-palette/94084
 # Light blue 66b2e4, mid blue 348bc3, indigo 405592 (dim), navy 0d3c5c (backgrounds only), orange f49b45 (attention)
 fish_color_normal normal
 fish_color_command 66b2e4

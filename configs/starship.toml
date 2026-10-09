@@ -1,15 +1,14 @@
 # Prompt config, linked to ~/.config/starship.toml by scripts/install.sh. Options: https://starship.rs/config/
 # Same layout as the old powerlevel10k one: Codespace, folder and git on the left, details on the right.
 
+palette = "fisheries"
+
 format = "${env_var.CODESPACE_DISPLAYNAME}$hostname$directory$git_branch$git_status${custom.dirty}$git_state$character"
 right_format = "$status$cmd_duration$jobs$time"
 
-# Every prompt color, as hex so it looks the same in any terminal.
-# Switch palettes by changing this name. Each palette fills the same color names.
-palette = "fisheries"
-
-# Fisheries Innovation Scotland: https://www.color-hex.com/color-palette/94084
-# Blues for where you are, orange for what needs attention. Its dark navy #0d3c5c is unused: too dark on black.
+# Fisheries Innovation Scotland
+# https://www.color-hex.com/color-palette/94084
+# Blues for where you are, orange for what needs attention.
 [palettes.fisheries]
 codespace = "#348bc3"
 path = "#66b2e4"
@@ -26,14 +25,14 @@ jobs = "#66b2e4"
 format = "[🪐 $env_value]($style) "
 style = "codespace"
 
-# 🏠 outside Codespaces. The hostname module is only used for its env-var check; the name itself is hidden.
+# 🏠 for local
+# hostname module only used for its env-var check
 [hostname]
 ssh_only = false
 detect_env_vars = ["!CODESPACES"]
 format = "🏠 "
 
-# Folders above the last three shrink to their first letter: ~/o/w/d/dartfish. Repo names stay whole.
-# Inside a repo, the shrunk part before the repo name is darker.
+# Shrink long paths
 [directory]
 fish_style_pwd_dir_length = 1
 style = "bold path"
@@ -41,7 +40,7 @@ before_repo_root_style = "path_shortened"
 repo_root_style = "bold path"
 read_only = " 🔒"
 
-# Just the branch name: no "on" and no icon, like the old powerlevel10k prompt
+# Just use the git branch name
 [git_branch]
 format = "[$branch(:$remote_branch)]($style) "
 style = "bold branch"
@@ -49,12 +48,12 @@ style = "bold branch"
 # Arrows only: ⇡ commits to push, ⇣ commits to pull
 [git_status]
 format = "([$ahead_behind]($style) )"
-style = "bold branch" # same as the branch name
+style = "bold branch"
 ahead = "⇡"
 behind = "⇣"
 diverged = "⇡⇣"
 
-# ● when anything is uncommitted: changed, staged or new files. Run `git status` for details.
+# ● when anything is uncommitted
 [custom.dirty]
 require_repo = true
 when = 'test -n "$(git status --porcelain)"'
@@ -62,17 +61,17 @@ shell = ["sh"]
 format = "[●]($style) "
 style = "changes"
 
-# Green arrow, red after a failed command, in the same shades as powerlevel10k
 [character]
 success_symbol = "[❯](arrow)"
 error_symbol = "[❯](arrow_error)"
 
 [cmd_duration]
-format = "[⏱️ $duration]($style) " # emoji-style stopwatch (with U+FE0F) so it takes two columns everywhere
+format = "[⏱️ $duration]($style) "
 style = "bold details"
 
+# async executions
 [jobs]
-symbol = "🔮" # background jobs
+symbol = "🔮"
 style = "bold jobs"
 
 [status]
