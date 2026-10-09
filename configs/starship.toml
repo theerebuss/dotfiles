@@ -1,5 +1,5 @@
 # Prompt config, linked to ~/.config/starship.toml by scripts/install.sh. Options: https://starship.rs/config/
-# Same layout as the old powerlevel10k one: Codespace, folder and git on the left, details on the right.
+# Codespace, folder and git on the left, details on the right.
 
 palette = "fisheries"
 

@@ -56,6 +56,7 @@ if status is-interactive
         test $status -eq 130; and echo
     end
 
-    # Abbreviations expand as you type. Port aliases from configs/.zshrc as you miss them, e.g.:
+    # Abbreviations expand as you type, e.g.:
     # abbr -a gk git checkout
+    # Old zsh aliases to port: git show 2e5b220:configs/.zshrc
 end
